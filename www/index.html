@@ -7,6 +7,7 @@
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -30,12 +31,13 @@
       </ion-header-bar>
       <ion-content>
 
-        <div class="display">{{display}}</div>
-        <div class="operation" ng-show="operation !== null">({{legend[operation.name]}})</div>
+        <div class="display-wrap">
+          <div class="display"><span ng-show="operation !== null">({{symbol}})</span>{{display}}</div>
+        </div>
 
         <div class="button-bar">
           <button class="button button-calm" ng-click="squaredbtn()">x<sup>2</sup></button>
-          <button class="button button-calm" ng-click="logbtn()">log<sub>a</sub>b</button>
+          <button class="button button-calm" ng-click="binop(log, 'log')">log<sub>a</sub>b</button>
           <button class="button button-positive" ng-click="sinbtn()">sin</button>
           <button class="button button-positive" ng-click="cosbtn()">cos</button>
           <button class="button button-positive" ng-click="tanbtn()">tan</button>
@@ -43,7 +45,7 @@
 
         <div class="button-bar">
           <button class="button button-calm" ng-click="sqrtbtn()">&radic;<span style="text-decoration:overline;">&nbsp;x</span></button>
-          <button class="button button-calm" ng-click="powbtn()">x<sup>y</sup></button>
+          <button class="button button-calm" ng-click="binop(pow, '^')">x<sup>y</sup></button>
           <button class="button button-positive" ng-click="asinbtn()">sin<sup>-1</sup></button>
           <button class="button button-positive" ng-click="acosbtn()">cos<sup>-1</sup></button>
           <button class="button button-positive" ng-click="atanbtn()">tan<sup>-1</sup></button>
@@ -53,28 +55,28 @@
           <button class="button" ng-click="number(7)">7</button>
           <button class="button" ng-click="number(8)">8</button>
           <button class="button" ng-click="number(9)">9</button>
-          <button class="button button-royal" ng-click="plusbtn()">+</button>
+          <button class="button button-royal" ng-click="binop(add, '+')">+</button>
         </div>
 
         <div class="button-bar">
           <button class="button" ng-click="number(4)">4</button>
           <button class="button" ng-click="number(5)">5</button>
           <button class="button" ng-click="number(6)">6</button>
-          <button class="button button-royal" ng-click="minusbtn()">-</button>
+          <button class="button button-royal" ng-click="binop(subtract, '&ndash;')">&ndash;</button>
         </div>
 
         <div class="button-bar">
           <button class="button" ng-click="number(1)">1</button>
           <button class="button" ng-click="number(2)">2</button>
           <button class="button" ng-click="number(3)">3</button>
-          <button class="button button-royal" ng-click="starbtn()">&times;</button>
+          <button class="button button-royal" ng-click="binop(multiply, '&times;')">&times;</button>
         </div>
 
         <div class="button-bar">
-          <button class="button" ng-click="negbtn()">+/-</button>
+          <button class="button" ng-click="negbtn()">&plusmn;</button>
           <button class="button" ng-click="number(0)">0</button>
           <button class="button" ng-click="decimalbtn()">.</button>
-          <button class="button button-royal" ng-click="divisionbtn()">&divide;</button>
+          <button class="button button-royal" ng-click="binop(divide, '&divide;')">&divide;</button>
         </div>
 
         <div class="button-bar">
